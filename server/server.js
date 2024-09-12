@@ -9,6 +9,9 @@ const port = 5001
 //express static file serving - public is the folder name
 app.use(express.static('server/public'))
 
+//allows express to parse through data to json
+app.use(express.json());
+
 //starts our server
 app.listen(port, () => {
     console.log('listening on port', port);
@@ -40,11 +43,19 @@ let quoteList = require('./modules/quoteList')
 // when we visit http://localhost:5001/quotes
 //in our browser, express will call this function
 app.get('/quotes', function(req,res) {
-    console.log('Request for /quotes was made');
+    console.log('Request for GET /quotes was made');
     //send back the item in res.send()
     //so we can use it in our browser
     res.send(quoteList)
     //res.status(400).send('that request was not valid');
+})
+
+app.post('/quotes', function(req, res) {
+    console.log('Request for POST /quotes was made')
+    console.log('This is the quote object:', req.body)
+    let quoteToAdd = req.body
+    quoteList.push(quoteToAdd)
+    res.sendStatus(201)
 })
 
 // all of these are the same - Route = Path = URL
@@ -75,4 +86,3 @@ app.get('/quotes', function(req,res) {
 //HTTP
 //HTTP is the speciification that describes everything we just talk about. 
 //So the fact that a reqest is made of a route and method, this is all descibed in HTTP Spec
-

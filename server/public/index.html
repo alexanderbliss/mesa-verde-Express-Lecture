@@ -5,6 +5,13 @@
 </head>
 <body>
   <h1>Quotes!</h1>
+  <form onsubmit="submitForm(event)">
+    Quote: <input type="text" id="quoteInput"/>
+    <br />
+    Author: <input type="text" id="authorInput"/>
+    <br />
+    <input type="submit"/>
+  </form>
   <ul id="output"></ul>
   
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
